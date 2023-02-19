@@ -2,11 +2,11 @@ package com.projectsujan.sms.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projectsujan.sms.entity.Student;
 import com.projectsujan.sms.service.StudentService;
@@ -77,6 +77,12 @@ public class StudentController {
 		return "redirect:/students";
 	}
 	
+	@GetMapping("/students/view/{id}")
+	public String viewStudent(@PathVariable ("id") Long id, @ModelAttribute("student") Student student,  Model model) {
+		
+		model.addAttribute("student", studentService.getStudentById(id));
+		return "viewstudent";
+	}
 	
 
 }
